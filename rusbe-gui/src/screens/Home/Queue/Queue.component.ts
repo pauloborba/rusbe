@@ -1,16 +1,38 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { QueueStatusEnum } from './QueueStatus.enum';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './Home.component.html',
-    styleUrls: ['./Home.component.scss']
+    selector: 'app-queue',
+    templateUrl: './Queue.component.html',
+    styleUrls: ['./Queue.component.scss']
 })
-export class Home{
-    userInfo: any;
-    renderPage: Boolean;
-    ngOnInit():void{
-        var data = localStorage.getItem("user");
-        this.userInfo = (data!=null&&data!=="") ? JSON.parse(data) : {};
-        this.renderPage = this.userInfo.name!==undefined;
+export class Queue implements OnInit {
+    voteButtonLabel = 'VOTE';
+    queueStatus: string;
+    iconAmount: Array<number>;
+    waitTime: string;
+
+    ngOnInit(): void {
+        this.getQueueStatus();
+        this.getIconAmount();
+        this.getWaitTime();
+    }
+
+    getQueueStatus(): void {
+        this.queueStatus = QueueStatusEnum.MEDIUM;
+    }
+
+    getIconAmount(): void {
+        if (this.queueStatus === QueueStatusEnum.SMALL) {
+            this.iconAmount = Array(1);
+        } else if (this.queueStatus === QueueStatusEnum.MEDIUM) {
+            this.iconAmount = Array(2);
+        } else if (this.queueStatus === QueueStatusEnum.LARGE) {
+            this.iconAmount = Array(3);
+        }
+    }
+
+    getWaitTime(): void {
+        this.waitTime = '30m';
     }
 }

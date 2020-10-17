@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<ion-card>
+  <ion-card-content class="flex ion-align-items-center ion-justify-content-between">
+    <div>
+      <ion-card-title>
+        <div>
+          <span class="margin-right-small vertical-align-middle">Queue status:</span>
+          <div class="margin-right-small inline-block vertical-align-middle">
+            <b [ngClass]="{'green': queueStatus === 'Small',
+                                     'yellow': queueStatus === 'Medium',
+                                     'red': queueStatus === 'Large'}">
+              {{ queueStatus }}
+            </b>
+          </div>
+          <div *ngFor="let icon of iconAmount" class="inline-block vertical-align-middle">
+            <ion-icon name="person"
+                      [ngClass]="{'green': queueStatus === 'Small',
+                            'yellow': queueStatus === 'Medium',
+                            'red': queueStatus === 'Large'}">
+            </ion-icon>
+          </div>
+        </div>
+      </ion-card-title>
+      <div>
+        <ion-label class="margin-left-small inline-block vertical-align-middle">
+          <ion-icon name="time-outline" class="vertical-align-middle"></ion-icon>
+          Estimated wait time: {{ waitTime }}
+        </ion-label>
+      </div>
+    </div>
+
+    <ion-button class="ion-float-right ion-align-items-center">
+      <ion-icon name="file-tray-full-outline"></ion-icon>
+      <ion-label class="margin-left-medium">{{ voteButtonLabel }}</ion-label>
+    </ion-button>
+  </ion-card-content>
+</ion-card>
