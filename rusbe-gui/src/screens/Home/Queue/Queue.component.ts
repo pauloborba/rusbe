@@ -7,6 +7,11 @@ import { QueueStatusEnum } from './QueueStatus.enum';
     styleUrls: ['./Queue.component.scss']
 })
 export class Queue implements OnInit {
+    loadersShow: object = {
+        gettingStatus: false,
+        gettingWaitTime: false,
+        gettingVoteRight: false
+    };
     voteButtonLabel = 'VOTE';
     queueStatus: string;
     iconAmount: Array<number>;
