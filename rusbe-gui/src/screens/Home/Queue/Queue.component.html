@@ -9,17 +9,13 @@
         <div>
           <span class="margin-right-small vertical-align-middle">Queue status:</span>
           <div class="margin-right-small inline-block vertical-align-middle">
-            <b [ngClass]="{'green': queueStatus === 'Small',
-                                     'yellow': queueStatus === 'Medium',
-                                     'red': queueStatus === 'Large'}">
+            <b [ngClass]="getStatusColor()">
               {{ queueStatus }}
             </b>
           </div>
           <div *ngFor="let icon of iconAmount" class="inline-block vertical-align-middle">
             <ion-icon name="person"
-                      [ngClass]="{'green': queueStatus === 'Small',
-                            'yellow': queueStatus === 'Medium',
-                            'red': queueStatus === 'Large'}">
+                      [ngClass]="getStatusColor()">
             </ion-icon>
           </div>
         </div>
@@ -32,10 +28,10 @@
       </div>
     </div>
 
-    <ion-button class="ion-float-right ion-align-items-center" [disabled]="loadersShow.gettingVoteRight">
+    <ion-button class="ion-float-right ion-align-items-center" [disabled]="loadersShow.gettingVoteRight || !voteRight" (click)="presentPopover()">
       <ion-spinner *ngIf="loadersShow.gettingVoteRight"></ion-spinner>
       <div class="flex" *ngIf="!loadersShow.gettingVoteRight">
-        <ion-icon name="file-tray-full-outline"></ion-icon>
+        <ion-icon name="{{ voteButtonIcon }}"></ion-icon>
         <ion-label class="margin-left-medium">{{ voteButtonLabel }}</ion-label>
       </div>
     </ion-button>

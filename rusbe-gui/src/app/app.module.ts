@@ -9,9 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { VotingPopover } from '../screens/Home/Queue/Voting.popover';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, VotingPopover],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -22,7 +23,10 @@ import { AppComponent } from './app.component';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+  ],
+  exports: [
+    VotingPopover
   ],
   bootstrap: [AppComponent]
 })
