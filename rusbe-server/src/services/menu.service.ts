@@ -1,9 +1,11 @@
-import Router from 'express'
+import Router from 'express';
+import {MenuApi} from './menuAPI.service';
 
-const menuService = Router()
+const menuService = Router();
+const api = new MenuApi();
 
-menuService.get('/menu',async(req,res)=>{
-    res.send({msg:"Olá"})
+menuService.get('/menu/food',async(req,res)=>{
+    res.send(api.getDailyMenu());
 })
 
 export default menuService
