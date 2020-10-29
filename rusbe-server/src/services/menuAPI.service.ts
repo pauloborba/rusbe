@@ -9,7 +9,7 @@ export class MenuApi{
         ["Ovos mexidos", "Carne de Charque", "Salsicha", "Carne de Sol"],
         ["Hiame","Macaxeira","Munguza","Batata doce","Torrada","Sopa de carne","Sopa de cebola"],
         ["Frutas", "Goiabada"],
-        ["Café", "Leite", "Refresco"]
+        ["Cafe", "Leite", "Refresco"]
     ];
     
     lunchOptions : String[][] = [
@@ -23,7 +23,7 @@ export class MenuApi{
         ["Carne de Charque", "Carne de Sol", "Salsicha","Ovos mexidos"],
         ["Torrada","Macaxeira","Batata doce","Sopa de carne","Munguza","Sopa de cebola","Hiame"],
         ["Goiabada", "Frutas"],
-        ["Café", "Refresco", "Leite"]
+        ["Cafe", "Refresco", "Leite"]
     ];
 
     getDay() : number{
@@ -83,7 +83,7 @@ export class MenuApi{
         return menu;
     }
 
-    getDailyMenu() : Object{
+    getDailyMenu() : any{
         const menu = {
             breakfast: this.getMenu("breakfast"),
             lunch: this.getMenu("lunch"),

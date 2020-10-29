@@ -27,8 +27,8 @@ export class Menu implements OnInit {
         );
     }
 
-    nextOption(k): void{
-        this.dailyMenuOption = (this.dailyMenuOption+k)%3;
-        if (this.dailyMenuOption===-1) this.dailyMenuOption=2;
+    nextOption(k:number): void{
+        let v = this.dailyMenuOption+k;
+        this.dailyMenuOption = (v<0) ? 2 : v%3;
     }
 }
