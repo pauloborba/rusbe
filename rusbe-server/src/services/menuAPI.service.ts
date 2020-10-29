@@ -20,10 +20,10 @@ export class MenuApi{
     ];
 
     dinnerOptions : String[][] = [
-        ["Ovos mexidos", "Carne de Charque", "Salsicha", "Carne de Sol"],
-        ["Hiame","Macaxeira","Munguza","Batata doce","Torrada","Sopa de carne","Sopa de cebola"],
-        ["Frutas", "Goiabada"],
-        ["Café", "Leite", "Refresco"]
+        ["Carne de Charque", "Carne de Sol", "Salsicha","Ovos mexidos"],
+        ["Torrada","Macaxeira","Batata doce","Sopa de carne","Munguza","Sopa de cebola","Hiame"],
+        ["Goiabada", "Frutas"],
+        ["Café", "Refresco", "Leite"]
     ];
 
     getDay() : number{

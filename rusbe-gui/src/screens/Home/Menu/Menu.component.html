@@ -1,0 +1,55 @@
+<ion-card>
+  <ion-card-content class="flex ion-align-items-center">
+    <div *ngIf="dailyMenu">
+      <button (click)="nextOption(1)">Next</button>
+      <div *ngIf="dailyMenuOption===0">
+        <h2>Desjejum</h2>
+        <div *ngFor="let food of dailyMenu.breakfast.carbs">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.breakfast.protein">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.breakfast.drink">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.breakfast.desert">
+          <p>{{food}}</p>
+        </div>
+      </div>
+
+      <div *ngIf="dailyMenuOption===1">
+        <h2>Almoço</h2>
+        <div *ngFor="let food of dailyMenu.lunch.carbs">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.lunch.protein">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.lunch.drink">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.lunch.desert">
+          <p>{{food}}</p>
+        </div>
+      </div>
+
+      <div *ngIf="dailyMenuOption===2">
+        <h2>Janta</h2>
+        <div *ngFor="let food of dailyMenu.dinner.carbs">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.dinner.protein">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.dinner.drink">
+          <p>{{food}}</p>
+        </div>
+        <div *ngFor="let food of dailyMenu.dinner.desert">
+          <p>{{food}}</p>
+        </div>
+      </div>
+      <button (click)="nextOption(-1)">Prev</button>
+    </div>
+  </ion-card-content>
+</ion-card>
