@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {QueueStatusEnum} from '../../../../../common/QueueStatus.enum';
-import {PopoverController} from '@ionic/angular';
+import {AlertController, PopoverController} from '@ionic/angular';
 import {VotingPopover} from './Voting.popover';
 import QueueVote from '../../../../../common/queueVote';
+import {QueueService} from '../../../service/Queue.service';
 
 @Component({
     selector: 'app-queue',
@@ -22,7 +23,9 @@ export class Queue implements OnInit {
     iconAmount: Array<number>;
     waitTime: string;
 
-    constructor(public popoverController: PopoverController) { }
+    constructor(public popoverController: PopoverController,
+                private queueService: QueueService,
+                private alertController: AlertController) { }
 
     async presentPopover() {
         const popover = await this.popoverController.create({
@@ -33,7 +36,6 @@ export class Queue implements OnInit {
         await popover.present();
 
         const voteOption = await popover.onDidDismiss();
-
         if (voteOption.data) {
             this.doVote(voteOption.data);
         }
@@ -51,8 +53,28 @@ export class Queue implements OnInit {
     }
 
     getVoteRight(): void {
-        this.voteRight = true;
+        const userInfo = this.getCurrentUser();
+
+        this.queueService.canVote(userInfo).subscribe(
+            value => {
+                if (typeof value === 'boolean') {
+                    this.voteRight = value;
+                }
+            },
+            async error => {
+                const alert = await this.alertController.create({
+                    header: 'Error!',
+                    message: error.message,
+                });
+
+                await alert.present();
+            }
+        );
         this.updateButtonInfo();
+    }
+
+    getCurrentUser(): object {
+        return JSON.parse(localStorage.getItem('user'));
     }
 
     updateButtonInfo(): void {

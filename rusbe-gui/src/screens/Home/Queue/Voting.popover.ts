@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { QueueStatusEnum } from '../../../../../common/QueueStatus.enum';
 import {PopoverController} from '@ionic/angular';
 
