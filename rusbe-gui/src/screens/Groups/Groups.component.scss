@@ -1,0 +1,8 @@
+$bg-colors: red, orange, yellow, green, blue, purple;
+.group-icon {
+    background-color: nth($bg-colors, random(length($bg-colors)));
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
