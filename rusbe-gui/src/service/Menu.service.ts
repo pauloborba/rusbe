@@ -16,4 +16,9 @@ export class MenuService {
     return this.http.get(url, {headers: this.headers});
   }
 
+  public doVote(id:string, foodName:string, isLike:boolean): Observable<any> {
+    const url = this.pathUrl + this.prefixRequest + 'vote';
+    return this.http.post(url, {headers: this.headers, id:id, foodName:foodName, isLike:isLike});
+  }
+
 }

@@ -6,23 +6,55 @@
         <h2>Desjejum</h2>
         <div *ngFor="let food of dailyMenu.breakfast.carbs" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.breakfast.protein" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.breakfast.drink" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.breakfast.desert" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
       </div>
 
@@ -30,23 +62,55 @@
         <h2>Almoço</h2>
         <div *ngFor="let food of dailyMenu.lunch.carbs" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.lunch.protein" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.lunch.drink" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.lunch.desert" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
       </div>
 
@@ -54,23 +118,55 @@
         <h2>Janta</h2>
         <div *ngFor="let food of dailyMenu.dinner.carbs" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.dinner.protein" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.dinner.drink" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
         <div *ngFor="let food of dailyMenu.dinner.desert" class="flex ion-align-items-center">
           <p>{{food.name}}</p>
-          <button>-</button>
-          <button>+</button>
+          <p>{{food.likes}}</p>
+          <p>{{food.dislikes}}</p>
+          <div *ngIf="canVoteOption(food.name)">
+            <ion-button (click)="computeVote(food.name, true)">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="computeVote(food.name, false)">
+              <ion-icon name="thumbs-down-outline"></ion-icon>
+            </ion-button>
+          </div>
         </div>
       </div>
       <button (click)="nextOption(-1)">Prev</button>
