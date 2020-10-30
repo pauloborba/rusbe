@@ -31,9 +31,10 @@
                     Group Members
                   </ion-list-header>
                   <div *ngIf="usersID.length>0; else zeroUsers">
-                    <ion-item *ngFor="let user of usersID">
+                    <ion-item *ngFor="let user of usersID; let i = index">
                         <ion-avatar class="user-icon"><p>{{user[0]}}</p></ion-avatar>
                         <ion-label>{{user}}</ion-label>
+                        <ion-icon name="trash-outline" (click)="removeUser(i)" class="remove-user"></ion-icon>
                       </ion-item>
                   </div>
                   <ng-template #zeroUsers>

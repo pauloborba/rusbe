@@ -7,21 +7,31 @@ import UserSchema from '../models/user'
 const groupsService = Router()
 const repGroup = new GroupRepository()
 
-groupsService.get('/groups',async(req,res)=>{
-    res.send({msg:"Olá"})
+groupsService.get('/groups', async (req, res) => {
+    res.send({ msg: "Olá" })
 })
-groupsService.get('/usergroups', async(req, res)=>{
+groupsService.get('/usergroups', async (req, res) => {
     const userID = req.query.id as string
     let userGroups = await repGroup.getUserGroups(userID);
     userGroups = userGroups.map(group => group.toJSON())
-    res.send({"groups": userGroups})
+    res.send({ "groups": userGroups })
 })
-groupsService.post('/creategroup', async (req, res)=>{
+groupsService.post('/creategroup', async (req, res) => {
     const usersID: string[] = req.body.members;
     const groupName: string = req.body.name;
-    let group:Group;
-    group = new Group(groupName, usersID)
-    let groupCreated = await repGroup.createGroup(group);
-    res.send({"group": groupCreated})
+    let group: Group;
+    let missingMembers = []
+    for (let id of usersID) {
+        let member = await UserSchema.findOne({ id });
+        if (member == null) missingMembers.push(id)
+    }
+    if (missingMembers.length) {
+        res.send({"missingMembers": missingMembers})
+    }
+    else {
+        group = new Group(groupName, usersID)
+        let groupCreated = await repGroup.createGroup(group);
+        res.send({ "group": groupCreated })
+    }
 })
 export default groupsService
