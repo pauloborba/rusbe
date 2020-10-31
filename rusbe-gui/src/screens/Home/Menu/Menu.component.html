@@ -1,14 +1,19 @@
 <ion-card>
   <ion-card-content class="flex ion-align-items-center ion-justify-content-between">
-    <div *ngIf="dailyMenu">
-      <button (click)="nextOption(1)">Next</button>
+    <div *ngIf="dailyMenu" style="display: flex; margin-right: 50px;">
+      <button (click)="nextOption(-1)">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
       <div *ngFor="let meal of dailyMenu | keyvalue">
-        <div *ngFor="let kind of meal.value | keyvalue" >
-          <div *ngIf="(meal.key=='breakfast' && dailyMenuOption===0) || (meal.key=='lunch' && dailyMenuOption===1) || (meal.key=='dinner' && dailyMenuOption===2)">
+        <div *ngIf="(meal.key=='breakfast' && dailyMenuOption===0) || (meal.key=='lunch' && dailyMenuOption===1) || (meal.key=='dinner' && dailyMenuOption===2)">
+          <h2 style="font-size: 80px; text-align: center;">{{meal.key=='breakfast' ? 'Desjejum' : (meal.key=='lunch' ? 'Almoço' : 'Janta')}}</h2>
+          <div *ngFor="let kind of meal.value | keyvalue">
             <div *ngFor="let food of kind.value" class="flex ion-align-items-center">
-              <p>{{food.name}}</p>
-              <p>{{food.likes}}</p>
-              <p>{{food.dislikes}}</p>
+              <h3 style="font-size: 50px;">{{food.name}}</h3>
+              <div style="font-size: 50px; margin-left: 35px; margin-right: 35px;">
+                <ion-icon name="happy-outline" *ngIf="food.likes>=food.dislikes"></ion-icon>
+                <ion-icon name="sad-outline" *ngIf="food.likes<food.dislikes"></ion-icon>
+              </div>
               <div *ngIf="canVoteOption(food.name)">
                 <ion-button (click)="computeVote(food.name, true)">
                   <ion-icon name="thumbs-up-outline"></ion-icon>
@@ -16,12 +21,16 @@
                 <ion-button (click)="computeVote(food.name, false)">
                   <ion-icon name="thumbs-down-outline"></ion-icon>
                 </ion-button>
+                <p>Likes: {{food.likes}}</p>
+                <p>Dislikes: {{food.dislikes}}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <button (click)="nextOption(-1)">Prev</button>
+      <button (click)="nextOption(1)">
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </button>
     </div>
   </ion-card-content>
 </ion-card>
