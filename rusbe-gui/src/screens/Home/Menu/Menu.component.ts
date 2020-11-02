@@ -16,22 +16,12 @@ export class Menu implements OnInit {
     constructor(private menu: MenuService){}
 
     ngOnInit(): void {
-        let data = localStorage.getItem("user");
-        this.user = (data!=null&&data!=="") ? JSON.parse(data) : {};
-        let h = (new Date()).getHours();
-        this.dailyMenuOption = (h>=10 ? 1 : 0) + (h>=15 ? 1 : 0);
-        this.menu.getDailyMenu().subscribe(
-            data => {
-                this.dailyMenu = data;
-            },
-            err => {
-                console.log(err.error);
-                this.dailyMenu = null;
-            }
-        );
+        this.getUserInfo();
+        this.updateMenuOption();
+        this.updateMenu();
     }
 
-    canVoteOption(foodName:string): boolean{
+    canVoteOnOption(foodName:string): boolean{
         for (let name of (this.user.optionsVoted || [])){
             if (name==foodName) return false;
         }
@@ -43,28 +33,62 @@ export class Menu implements OnInit {
             data => {
                 if (data.msg=="Success"){
                     this.user.optionsVoted.push(foodName);
-                    localStorage.setItem("user", JSON.stringify(this.user));
-                    for (let meal in this.dailyMenu){
-                        for (let kind in this.dailyMenu[meal]){
-                            for (let [index, food] of this.dailyMenu[meal][kind].entries()){
-                                if (food.name!=foodName) continue;
-                                this.dailyMenu[meal][kind][index].likes += isLike?1:0;
-                                this.dailyMenu[meal][kind][index].dislikes += isLike?0:1;
-                            }
-                        }
-                    }
+                    this.updateUserInfo();
+                    this.voteOnFood(foodName, isLike);
                 }else{
-                    console.log(data.msg);
+                    this.alertErrorMsg("computeVote()", data.msg);
                 }
             },
             err => {
-                console.log(err.error);
+                this.alertErrorMsg("computeVote()", err.error);
             }
         );
+    }
+
+    voteOnFood(foodName:string, isLike:boolean): void {
+        for (let meal in this.dailyMenu){
+            for (let kind in this.dailyMenu[meal]){
+                for (let [index, food] of this.dailyMenu[meal][kind].entries()){
+                    if (food.name!=foodName) continue;
+                    this.dailyMenu[meal][kind][index].likes += isLike?1:0;
+                    this.dailyMenu[meal][kind][index].dislikes += isLike?0:1;
+                }
+            }
+        }
+    }
+
+    updateUserInfo(): void {
+        localStorage.setItem("user", JSON.stringify(this.user));
+    }
+
+    getUserInfo(): void {
+        let data = localStorage.getItem("user");
+        this.user = (data!=null&&data!=="") ? JSON.parse(data) : {};
+    }
+
+    updateMenu(): void {
+        this.menu.getDailyMenu().subscribe(
+            data => {
+                this.dailyMenu = data;
+            },
+            err => {
+                this.alertErrorMsg("updateMenu()", err.error);
+                this.dailyMenu = null;
+            }
+        );
+    }
+
+    updateMenuOption(): void {
+        let h = (new Date()).getHours();
+        this.dailyMenuOption = (h>=10 ? 1 : 0) + (h>=15 ? 1 : 0);
     }
 
     nextOption(k:number): void{
         let v = this.dailyMenuOption+k;
         this.dailyMenuOption = (v<0) ? 2 : v%3;
+    }
+
+    alertErrorMsg(where:string, msg: any): void{
+        console.log("Following error ocurred at " + where + ": ", msg);
     }
 }
