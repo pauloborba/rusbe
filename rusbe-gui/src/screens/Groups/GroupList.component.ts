@@ -4,13 +4,14 @@ import { AlertController } from '@ionic/angular';
 import Group from '../../../../common/groups'
 @Component({
     selector: 'app-groups',
-    templateUrl: './Groups.component.html',
-    styleUrls: ['./Groups.component.scss']
+    templateUrl: './GroupList.component.html',
+    styleUrls: ['./GroupList.component.scss']
 })
 export class Groups {
     userInfo: any;
     renderPage: Boolean;
     groups: Group[];
+    times: string[]
     constructor(private GroupsService: GroupsService, private alertController: AlertController) { }
     ngOnInit(): void {
         var data = localStorage.getItem("user");
@@ -19,9 +20,10 @@ export class Groups {
         this.GroupsService.getUserGroups(this.userInfo.id).subscribe(
             data => {
                 this.groups = data["groups"];
-                console.log(this.groups)
+                this.times = data["times"]
             },
             async err => {
+                console.log('disgraçaaaa')
                 await this.presentAlert(err.error.message);
             }
         )

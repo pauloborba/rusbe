@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Groups } from './Groups.component';
+import { Groups } from './GroupList.component';
 import { NewGroup } from './NewGroup.component'
-
+import { GroupMsgs } from './Group.component'
 import { GroupsRoutingModule } from './Groups-routing.module';
 
 @NgModule({
@@ -14,6 +14,6 @@ import { GroupsRoutingModule } from './Groups-routing.module';
     FormsModule,
     GroupsRoutingModule
   ],
-  declarations: [Groups, NewGroup]
+  declarations: [Groups, NewGroup, GroupMsgs]
 })
 export class GroupsPageModule {}

@@ -1,0 +1,19 @@
+.wrapper{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+.meal-time{
+    border-style: solid;
+    border-color: blue;
+    border-width: 2px;
+    width: 70vw;
+    height: 12vh;
+    margin-top: 15px;
+}
+a{
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}

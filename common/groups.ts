@@ -3,7 +3,7 @@ export default class Group{
     name: string;
     messagesID: string[];
     usersID: string[];
-    meals_times: any;
+    meals_times: {userID:String, meal: String, fromTime: Date, toTime:Date}[];
     constructor(name: string,users: string[]){
         this.id = this.generateId()
         this.name = name;

@@ -21,9 +21,12 @@
 
   <div class="container" *ngIf="renderPage; else loggedOut">
     <ion-list>
-      <ion-item *ngFor="let group of groups">
+      <ion-item *ngFor="let group of groups; let i=index">
         <ion-avatar class="group-icon"><p>{{group.name[0]}}</p></ion-avatar>
-        <ion-label>{{group.name}}</ion-label>
+        <a [routerLink]="['./groupmsgs', group.id]">
+          <ion-label>{{group.name}}</ion-label>
+          <p class="time">{{times[i]}}</p>
+        </a>
       </ion-item>
     </ion-list>
 

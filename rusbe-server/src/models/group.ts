@@ -1,13 +1,11 @@
 import mongoose from 'mongoose'
-import Message from '../../../common/message'
-import User from '../../../common/user'
 
 const GroupSchema = new mongoose.Schema({
     id: String,
     name: String,
     messagesID: [String],
     usersID: [String],
-    meals_times: []
+    meals_times: [{userID:String, meal: String, fromTime: Date, toTime:Date}]
 })
 
 export default mongoose.model('Group', GroupSchema)
