@@ -4,6 +4,7 @@ import {AlertController, PopoverController} from '@ionic/angular';
 import {VotingPopover} from './Voting.popover';
 import QueueVote from '../../../../../common/queueVote';
 import {QueueService} from '../../../service/Queue.service';
+import user from '../../../../../rusbe-server/src/models/user';
 
 @Component({
     selector: 'app-queue',
@@ -59,9 +60,12 @@ export class Queue implements OnInit {
             value => {
                 if (typeof value === 'boolean') {
                     this.voteRight = value;
+                    this.updateButtonInfo();
                 }
             },
             async error => {
+                this.updateButtonInfo();
+
                 const alert = await this.alertController.create({
                     header: 'Error!',
                     message: error.message,
@@ -70,7 +74,6 @@ export class Queue implements OnInit {
                 await alert.present();
             }
         );
-        this.updateButtonInfo();
     }
 
     getCurrentUser(): object {
@@ -78,7 +81,7 @@ export class Queue implements OnInit {
     }
 
     updateButtonInfo(): void {
-        if (this.voteRight) {
+        if (this.voteRight === true) {
             this.voteButtonIcon = 'file-tray-full-outline';
             this.voteButtonLabel = 'VOTE';
         }
@@ -113,12 +116,45 @@ export class Queue implements OnInit {
     }
 
     doVote(voteOption): void {
-        const userVote = new QueueVote();
-        userVote.state = QueueStatusEnum[voteOption];
-        userVote.validity = this.getVoteValidityFromNow();
+        const votationObject = this.buildVotationObject(voteOption);
+
+        this.queueService.doVote(votationObject).subscribe(
+            value => {
+                if (typeof value === 'boolean') {
+                    this.getVoteRight();
+                }
+            },
+            async error => {
+                this.voteRight = false;
+                this.updateButtonInfo();
+
+                const alert = await this.alertController.create({
+                    header: 'Error!',
+                    message: error.message,
+                });
+                await alert.present();
+            }
+        );
 
         this.voteRight = false;
         this.updateButtonInfo();
+    }
+
+    buildVotationObject(voteOption): object {
+        const votationObject = {
+            vote: this.buildVotationObject(voteOption),
+            user: this.getCurrentUser()
+        };
+
+        return votationObject;
+    }
+
+    buildUserVote(voteOption): QueueVote {
+        const vote = new QueueVote();
+        vote.state = QueueStatusEnum[voteOption];
+        vote.validity = this.getVoteValidityFromNow();
+
+        return vote;
     }
 
     getVoteValidityFromNow(): number {
