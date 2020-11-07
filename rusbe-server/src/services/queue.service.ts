@@ -10,7 +10,7 @@ const queueBasePath = '/queue';
 queueService.get(queueBasePath, async(req,res)=>{
     try {
         const queueStatus = queueRepository.getQueueStatus();
-        res.send(queueStatus);
+        res.send({status: queueStatus});
     } catch (error) {
         res.status(500).send({message: error.message});
     }
