@@ -7,6 +7,15 @@ const queueService = Router();
 const queueRepository = new QueueRepository();
 const queueBasePath = '/queue';
 
+queueService.get(queueBasePath, async(req,res)=>{
+    try {
+        const queueStatus = queueRepository.getQueueStatus();
+        res.send(queueStatus);
+    } catch (error) {
+        res.status(500).send({message: error.message});
+    }
+})
+
 queueService.post(queueBasePath + '/voteRight',async(req,res)=>{
     try {
         const canVote = await queueRepository.canVote(req.body.id, req.body.password);

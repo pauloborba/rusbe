@@ -25,7 +25,9 @@
     "@ionic/angular": "^5.0.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@types/mongoose": "^5.7.36",
+    "mongoose": "^5.10.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.5",

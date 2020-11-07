@@ -142,7 +142,7 @@ export class Queue implements OnInit {
 
     buildVotationObject(voteOption): object {
         const votationObject = {
-            vote: this.buildVotationObject(voteOption),
+            vote: this.buildUserVote(voteOption),
             user: this.getCurrentUser()
         };
 
@@ -158,9 +158,9 @@ export class Queue implements OnInit {
     }
 
     getVoteValidityFromNow(): number {
-        const now = Math.floor(new Date().getTime() / 1000);
-        const thirtyMinutes = 1800;
+        const now = new Date().getTime();
+        const thirtyMinutes = 1800000;
 
-        return now + thirtyMinutes;
+        return now + 60000;
     }
 }

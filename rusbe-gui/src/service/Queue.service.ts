@@ -32,7 +32,7 @@ export class QueueService {
     }
 
     doVote(votationObject: object): Observable<boolean> {
-        return this.http.post<any>(this.apiURL + this.voteRoute, votationObject, {headers: this.headers}).pipe(
+        return this.http.post<any>(this.apiURL + this.queueRoute + this.voteRoute, votationObject, {headers: this.headers}).pipe(
             retry(3),
             map(response => {
                 if (!response.message) {
