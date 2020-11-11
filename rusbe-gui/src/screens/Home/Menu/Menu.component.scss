@@ -1,3 +1,18 @@
+* {box-sizing:border-box}
+
+.bar-container {
+  width: 100%;
+  background-color: #E64A19;
+}
+
+.bar-like {
+  text-align: right;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: white;
+  background-color: #4CAF50;
+}
+
 .flex {
   display: flex;
 }
@@ -23,18 +38,8 @@
   margin-right: 0.3rem;
 }
 
-.red {
-  color: #E64A19;
-}
-
-.yellow {
-  color: #FBC02D;
-}
-
-.green {
-  color: #388E3C;
-}
 
 .full-width {
   width: 100%;
 }
+
