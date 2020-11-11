@@ -13,8 +13,9 @@
               <div style="font-size: 50px; margin-left: 35px; margin-right: 35px;">
                 <ion-icon name="happy-outline" *ngIf="food.likes>=food.dislikes"></ion-icon>
                 <ion-icon name="sad-outline" *ngIf="food.likes<food.dislikes"></ion-icon>
-                <div *ngIf="(food.likes+food.dislikes)>0" class="bar-container" style="font-size: 10px;">
-                  <div class="bar-like" style="width: {{100*(food.likes)/(food.likes+food.dislikes)}}%;">{{100*food.likes/(food.likes+food.dislikes)}}%</div>
+                <div class="bar-container" style="font-size: 10px;">
+                  <div *ngIf="(food.likes+food.dislikes)>0" class="bar-like" style="width: {{100*(food.likes)/(food.likes+food.dislikes)}}%;">{{100*food.likes/(food.likes+food.dislikes)}}%</div>
+                  <div *ngIf="(food.likes+food.dislikes)==0" class="bar-noeval">Not evaluated</div>
                 </div>
               </div>
               <div *ngIf="canVoteOnOption(food.name)">
