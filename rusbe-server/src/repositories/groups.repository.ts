@@ -11,15 +11,15 @@ export default class GroupsRepository {
             id: group.id,
             name: group.name,
             messagesID: [],
-            usersID: group.usersID,
+            usersId: group.usersId,
             meal_times: []
         })
     }
-    private createTime(userID, meal, fromTime, toTime) {
-        return { userID: userID, meal: meal, fromTime: fromTime, toTime: toTime }
+    private createTime(userId, meal, fromTime, toTime) {
+        return { userId: userId, meal: meal, fromTime: fromTime, toTime: toTime }
     }
     public async getUserGroups(id: string): Promise<any> {
-        const groups = await GroupSchema.find({ "usersID": id })
+        const groups = await GroupSchema.find({ "usersId": id })
         return groups.map((gp) => gp.toJSON())
     }
     public async getUserGroupsNextMealTimes(id: string): Promise<string[]> {
@@ -82,11 +82,9 @@ export default class GroupsRepository {
     }
     private async getBestTimeNextMeal(groupId: string): Promise<string> {
         const nexTimes: Meal[] = await this.getNextMealTimes(groupId)
-        console.log(nexTimes)
         if (!nexTimes.length) return undefined//no meal scheduled
         const slots = Array(23).fill(0)
         const nextMeal = this.getNextMeal(nexTimes) as 'breakfast'|'lunch'|'dinner'
-        console.log(nextMeal)
         this.voteTime(nextMeal, slots, nexTimes)
         const slotMostVoted = slots.reduce((p, c) => Math.max(p, c))
         const slotMostVotedIndex = slots.findIndex(val => val == slotMostVoted)
@@ -109,7 +107,14 @@ export default class GroupsRepository {
         let timeEnd = this.getTimeFormat(end, '00')
         return timeStart + '-' + timeEnd
     }
-
+    async deleteMyTime(groupId: string, meal: string, userId: string){
+        const group = await GroupSchema.findOne({ id: groupId })
+        let meals: Meal[] = group.toJSON().meals_times
+        meals = meals.filter(slot=> 
+            !(slot.userId==userId && slot.meal==meal && new Date(slot.fromTime)> new Date())
+        )
+        return await GroupSchema.updateOne({ id: groupId }, { $set: { meals_times: meals } })
+    }
     async postNewMsg(groupId: string, msg: Message): Promise<any> {
         let group = await GroupSchema.findOne({ id: groupId })
         let msgs = group.toJSON().messagesID

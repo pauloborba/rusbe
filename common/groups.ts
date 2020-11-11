@@ -2,13 +2,13 @@ export default class Group{
     id: string;
     name: string;
     messagesID: string[];
-    usersID: string[];
-    meals_times: {userID:String, meal: String, fromTime: Date, toTime:Date}[];
+    usersId: string[];
+    meals_times: {userId:String, meal: String, fromTime: Date, toTime:Date}[];
     constructor(name: string,users: string[]){
         this.id = this.generateId()
         this.name = name;
         this.messagesID =[];
-        this.usersID = users;
+        this.usersId = users;
         this.meals_times = []
     }
     generateId(): string{

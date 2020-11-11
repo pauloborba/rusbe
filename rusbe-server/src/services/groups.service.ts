@@ -47,4 +47,13 @@ groupsService.post('/groups/postmytime',async(req,res)=>{
     await repGroup.postNewMsg(groupId, msg);
     res.send({data:data})
 })
+groupsService.put('/groups/deletemytime',async(req,res)=>{
+    const groupId: string = req.body.groupId as string
+    const userId: string = req.body.userId as string
+    const meal:string =req.body.meal as string;
+    const msg: Message = req.body.msg
+    const data = await repGroup.deleteMyTime(groupId, meal, userId)
+    await repGroup.postNewMsg(groupId, msg);
+    res.send({data:data})
+})
 export default groupsService

@@ -15,10 +15,13 @@ export class GroupsService {
   createGroup(usersID, name): Observable<any>{
     return this.http.post(this.pathUrl+'creategroup', {headers: this.headers, members: usersID, name: name});
   }
-  getInfoGroup(groupId):Observable<any>{
-    return this.http.get(this.pathUrl+"groupinfo"+"?id="+groupId, {headers: this.headers})
+  getInfoGroup(groupId, userId):Observable<any>{
+    return this.http.get(this.pathUrl+"groupinfo"+"?id="+groupId+"&userId="+userId , {headers: this.headers})
   }
   postMyTime(groupId, meal_time, msg): Observable<any>{
     return this.http.post(this.pathUrl+'postmytime', {headers: this.headers, groupId, meal_time, msg});
+  }
+  deleteMyTime(groupId: string, meal: string, msg: Message, userId: any): Observable<any>{
+    return this.http.put(this.pathUrl+'deletemytime', {headers: this.headers, groupId, userId, meal, msg});
   }
 }
