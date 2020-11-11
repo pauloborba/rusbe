@@ -1,5 +1,3 @@
-* {box-sizing:border-box}
-
 .bar-container {
   width: 100%;
   background-color: #E64A19;
@@ -16,30 +14,3 @@
 .flex {
   display: flex;
 }
-
-.vertical-align-middle {
-  vertical-align: middle;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.margin-left-small {
-  margin-left: 0.3rem;
-}
-
-.margin-left-medium {
-  margin-left: 0.6rem;
-}
-
-
-.margin-right-small {
-  margin-right: 0.3rem;
-}
-
-
-.full-width {
-  width: 100%;
-}
-
