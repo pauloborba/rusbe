@@ -85,8 +85,8 @@ export class MenuApi{
 
     getDailyMenu() : any{
         const menu = {
-            breakfast: this.getMenu("breakfast"),
-            lunch: this.getMenu("lunch"),
+            breakfast:{protein:["Salsicha"],carbs:["Cuzcuz"],desert:["Frutas"],drink:["Leite"]}||this.getMenu("breakfast"),
+            lunch:{protein:["Bife"],carbs:["Arroz"],desert:["Goiabada"],drink:["Suco"]}||this.getMenu("lunch"),
             dinner: this.getMenu("dinner")
         }
 

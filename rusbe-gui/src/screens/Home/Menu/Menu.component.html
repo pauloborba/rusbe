@@ -1,28 +1,28 @@
 <ion-card>
   <ion-card-content class="flex ion-align-items-center ion-justify-content-between">
     <div *ngIf="dailyMenu" style="display: flex; margin-right: 50px;">
-      <button (click)="nextOption(-1)">
+      <button name="prevoptionbtn" (click)="nextOption(-1)">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </button>
       <div *ngFor="let meal of dailyMenu | keyvalue">
         <div *ngIf="(meal.key=='breakfast' && dailyMenuOption===0) || (meal.key=='lunch' && dailyMenuOption===1) || (meal.key=='dinner' && dailyMenuOption===2)">
-          <h2 style="font-size: 80px; text-align: center;">{{meal.key=='breakfast' ? 'Desjejum' : (meal.key=='lunch' ? 'Almoço' : 'Janta')}}</h2>
+          <h2 name="currentmeal" style="font-size: 80px; text-align: center;">{{meal.key=='breakfast' ? 'Desjejum' : (meal.key=='lunch' ? 'Almoço' : 'Janta')}}</h2>
           <div *ngFor="let kind of meal.value | keyvalue">
             <div *ngFor="let food of kind.value" class="flex ion-align-items-center">
-              <h3 style="font-size: 50px;">{{food.name}}</h3>
+              <h3 name="foodname" style="font-size: 50px;">{{food.name}}</h3>
               <div style="font-size: 50px; margin-left: 35px; margin-right: 35px;">
                 <ion-icon name="happy-outline" *ngIf="food.likes>=food.dislikes"></ion-icon>
                 <ion-icon name="sad-outline" *ngIf="food.likes<food.dislikes"></ion-icon>
-                <div class="bar-container" style="font-size: 10px;">
-                  <div *ngIf="(food.likes+food.dislikes)>0" class="bar-like" style="width: {{100*(food.likes)/(food.likes+food.dislikes)}}%;">{{100*food.likes/(food.likes+food.dislikes)}}%</div>
-                  <div *ngIf="(food.likes+food.dislikes)==0" class="bar-noeval">Not evaluated</div>
+                <div id="{{'evaluation'+food.name.toString()}}" class="bar-container" style="font-size: 10px;">
+                  <div *ngIf="(food.likes+food.dislikes)>0" class="bar-like" style="width: {{100*(food.likes)/(food.likes+food.dislikes)}}%;">{{100*(food.likes/(food.likes+food.dislikes))}}%</div>
+                  <div *ngIf="(food.likes+food.dislikes)==0" class="bar-noeval">0%</div>
                 </div>
               </div>
               <div *ngIf="canVoteOnOption(food.name)">
-                <ion-button (click)="computeVote(food.name, true)">
+                <ion-button id="{{'like'+food.name.toString()}}" (click)="computeVote(food.name, true)">
                   <ion-icon name="thumbs-up-outline"></ion-icon>
                 </ion-button>
-                <ion-button (click)="computeVote(food.name, false)">
+                <ion-button id="{{'dislike'+food.name.toString()}}" (click)="computeVote(food.name, false)">
                   <ion-icon name="thumbs-down-outline"></ion-icon>
                 </ion-button>
                 <p>Likes: {{food.likes}}</p>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <button (click)="nextOption(1)">
+      <button name="nextoptionbtn" (click)="nextOption(1)">
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </button>
     </div>

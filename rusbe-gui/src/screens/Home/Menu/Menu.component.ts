@@ -80,6 +80,7 @@ export class Menu implements OnInit {
 
     updateMenuOption(): void {
         let h = (new Date()).getHours();
+        h=11;
         this.dailyMenuOption = (h>=10 ? 1 : 0) + (h>=15 ? 1 : 0);
     }
 
