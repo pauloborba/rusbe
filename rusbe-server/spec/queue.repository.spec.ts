@@ -2,6 +2,7 @@ import {QueueRepository} from "../src/repositories/queue.repository";
 import {QueueStatusEnum} from "../../common/QueueStatus.enum";
 import QueueVote from "../../common/queueVote";
 import User from "../../common/user";
+import UserScheama from "../src/models/user";
 
 describe("The queue repository", () => {
     let repository: QueueRepository;
@@ -9,6 +10,9 @@ describe("The queue repository", () => {
     const userName = "mgrf";
     const userId = "marconi"
 
+    /**
+     * Builds and returns a QueueVote instance with the given state and validity.
+     */
     function buildVote(state: QueueStatusEnum, validity: number): QueueVote {
         const vote = new QueueVote();
         vote.state = state;
@@ -17,6 +21,9 @@ describe("The queue repository", () => {
         return vote;
     }
 
+    /**
+     * Sets up and returns an user using the class attributes.
+     */
     function setupUser(): User {
         const rusbeUser = new User();
         rusbeUser.voteRight = true;
@@ -31,6 +38,12 @@ describe("The queue repository", () => {
     beforeEach(() => {
         repository = new QueueRepository();
         user = setupUser();
+    });
+
+    afterAll(async () => {
+        user.voteRight = true;
+        const id = userId;
+        await UserScheama.findOneAndUpdate({id}, user, {});
     });
 
     it("initializes correctly", () => {
@@ -55,7 +68,7 @@ describe("The queue repository", () => {
         expect(repository.votes.includes(largeVote)).toEqual(true);
     });
 
-    it("backoffs user when it votes", () => {
+    it("backs off an user when it votes", () => {
         repository.doVote(buildVote(QueueStatusEnum.SMALL, new Date().getTime()), user);
 
         expect(repository.usersWithVoteTimeout.length).toEqual(1);
