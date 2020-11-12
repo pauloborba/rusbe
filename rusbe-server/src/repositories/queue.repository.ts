@@ -88,6 +88,7 @@ export class QueueRepository{
             this.votes.push(userVote);
 
             await this.updateUserInfo(user);
+            await this.refreshQueueStatus();
 
             return true;
         } catch(error) {
