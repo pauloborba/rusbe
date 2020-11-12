@@ -2,19 +2,17 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Home } from './Home.component';
-import { Queue } from './Queue/Queue.component';
-
-
-import { HomeRoutingModule } from './Home-routing.module';
+import { Queue } from './Queue.component';
+import { QueueService } from '../../../service/Queue.service';
+import { VotingPopover } from './Voting.popover';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    HomeRoutingModule
   ],
-  declarations: [Home, Queue]
+  declarations: [Queue, VotingPopover],
+  providers: [QueueService]
 })
-export class HomePageModule {}
+export class QueueModule {}

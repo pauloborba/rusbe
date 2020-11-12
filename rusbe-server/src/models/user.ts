@@ -1,11 +1,11 @@
-import mongoose from 'mongoose'
+import * as mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     id: String,
     password: String,
     name: String,
     likes: [String],
-    voteRight: [String],
+    voteRight: Boolean,
     optionsVoted: [String]
 })
 

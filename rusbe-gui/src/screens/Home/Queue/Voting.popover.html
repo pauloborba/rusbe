@@ -1,0 +1,23 @@
+<div class="ion-padding-top">
+    <ion-title>
+        Vote for the queue size:
+    </ion-title>
+</div>
+<div>
+    <ion-list>
+        <ion-radio-group (ionChange)="setSelectedOptionValue($event)">
+                <ion-item *ngFor="let option of options">
+                    <ion-label>
+                        <span class="margin-right-small inline-block vertical-align-middle">{{ option }}</span>
+                        <ion-icon name="person" *ngFor="let icon of getIconAmount(option)" class="inline-block vertical-align-middle"></ion-icon>
+                    </ion-label>
+                    <ion-radio value="{{ option.toUpperCase() }}" id="{{ option + 'Option'}}"></ion-radio>
+                </ion-item>
+        </ion-radio-group>
+    </ion-list>
+    <div class="full-width flex ion-justify-content-center">
+        <ion-button id="submitVote" (click)="createVote()" [disabled]="!selectedOption">
+            <ion-label class="ion-align-items-center">VOTE</ion-label>
+        </ion-button>
+    </div>
+</div>

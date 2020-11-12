@@ -20,7 +20,7 @@ loginService.post('/newuser', async(req, res)=>{
         name,
         password,
         likes :[],
-        voteRight:[],
+        voteRight: true,
         optionsVoted:[]
     })
     resp = await UserSchema.findOne({id})
