@@ -66,10 +66,23 @@ export class Menu implements OnInit {
         this.user = (data!=null&&data!=="") ? JSON.parse(data) : {};
     }
 
+    calculatePercentage() : void{
+        for (let meal in this.dailyMenu){
+            for (let kind in this.dailyMenu[meal]){
+                this.dailyMenu[meal][kind].forEach((food, index) => {
+                    const totalS = food.likes+food.dislikes;
+                    const percentage = totalS ? 100*(food.likes/totalS) : 0;
+                    this.dailyMenu[meal][kind][index].percentage = Math.round(percentage);
+                });
+            }
+        }
+    }
+
     updateMenu(): void {
         this.menu.getDailyMenu().subscribe(
             data => {
                 this.dailyMenu = data;
+                this.calculatePercentage();
             },
             err => {
                 this.alertErrorMsg("updateMenu()", err.error);

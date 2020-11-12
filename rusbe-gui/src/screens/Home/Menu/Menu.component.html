@@ -14,7 +14,7 @@
                 <ion-icon name="happy-outline" *ngIf="food.likes>=food.dislikes"></ion-icon>
                 <ion-icon name="sad-outline" *ngIf="food.likes<food.dislikes"></ion-icon>
                 <div id="{{'evaluation'+food.name.toString()}}" class="bar-container" style="font-size: 10px;">
-                  <div *ngIf="(food.likes+food.dislikes)>0" class="bar-like" style="width: {{100*(food.likes)/(food.likes+food.dislikes)}}%;">{{100*(food.likes/(food.likes+food.dislikes))}}%</div>
+                  <div *ngIf="(food.likes+food.dislikes)>0" class="bar-like" style="width: {{food.percentage}}%;">{{food.percentage}}%</div>
                   <div *ngIf="(food.likes+food.dislikes)==0" class="bar-noeval">0%</div>
                 </div>
               </div>
