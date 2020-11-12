@@ -175,6 +175,7 @@ export class Queue implements OnInit {
      */
     doVote(voteOption): void {
         const votationObject = this.buildVotationObject(voteOption);
+        this.voteRight = false;
 
         this.queueService.doVote(votationObject).subscribe(
             value => {

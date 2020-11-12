@@ -9,5 +9,5 @@ Then I can see "Medium" in the queue status
 
 Scenario: Checking the queue wait time
 Given I am at the home screen page
-When the queue wait time has been loaded
+When The queue wait time has been loaded
 Then I can see the wait time

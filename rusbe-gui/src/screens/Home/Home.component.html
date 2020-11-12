@@ -15,7 +15,7 @@
   </ion-header>
 
   <div class="container" *ngIf="renderPage; else loggedOut">
-    <app-queue></app-queue>
+    <app-queue id="queueComponent"></app-queue>
   </div>
 
   <ng-template #loggedOut>
