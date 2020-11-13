@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-fab *ngIf="renderPage" horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button (click)="newGroup()">
+    <ion-fab-button (click)="newGroup()" name="newgroup">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -23,7 +23,7 @@
     <ion-list>
       <ion-item *ngFor="let group of groups; let i=index">
         <ion-avatar class="group-icon"><p>{{group.name[0]}}</p></ion-avatar>
-        <a [routerLink]="['./groupmsgs', group.id]">
+        <a [routerLink]="['./groupmsgs', group.id]" name="groupname">
           <ion-label>{{group.name}}</ion-label>
           <p class="time">{{times[i]}}</p>
         </a>

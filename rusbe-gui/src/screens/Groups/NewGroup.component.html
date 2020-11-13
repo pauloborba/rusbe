@@ -6,7 +6,7 @@
             </ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-button [disabled]="!readyToCreate" (click)="createGroup()">
+            <ion-button [disabled]="!readyToCreate" name="creategroup" (click)="createGroup()">
                 <ion-icon name="checkmark-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -17,14 +17,14 @@
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-        <ion-fab-button (click)="addMember()">
+        <ion-fab-button name="addmember" (click)="addMember()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
     <div class="wrapper-name">
         <div>
             <div class="banner">
-            <ion-input class="name" id="name" placeholder="Please enter the group name" (change)="changeGroupName()"></ion-input>
+            <ion-input class="name" name="groupname" id="name" placeholder="Please enter the group name" (change)="changeGroupName()"></ion-input>
         </div>
             <ion-list>
                 <ion-list-header style="font-size: 20px;">

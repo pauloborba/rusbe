@@ -27,6 +27,7 @@ export class NewGroup {
         const alert = await this.alertController.create({
             header: header,
             message: msg,
+            id:"alertgroup"
         });
         await alert.present();
     }
@@ -48,7 +49,8 @@ export class NewGroup {
             inputs: [{
                 name: 'userID',
                 type: 'text',
-                placeholder: 'Please enter the member login'
+                placeholder: 'Please enter the member login',
+                id: 'userid'
             }],
             buttons: [{
                 text: 'Cancel',
@@ -57,6 +59,7 @@ export class NewGroup {
             },
             {
                 text: 'OK',
+                cssClass: 'confirmuser',
                 handler: (alertData) => {
                     this.usersID.push(alertData.userID)
                     this.changeReady()
@@ -95,7 +98,7 @@ export class NewGroup {
                 }
                 else {
                     this.presentAlert("Group created with success!", 'New Group')
-                    setTimeout(this.backToGroups, 2000)
+                    setTimeout(this.backToGroups, 3000)
                 }
             },
             err => {

@@ -10,12 +10,12 @@ interface Meal { userId: string, meal: string, fromTime: Date, toTime: Date }
 
 @Component({
     template: `
-    <ion-list>
-        <ion-item (click)="handleClick('add')">
-            Add available time
+    <ion-list> 
+        <ion-item>
+            <div name="addtime" class="modal" (click)="handleClick('add')">Add available time</div>
         </ion-item>
-        <ion-item (click)="handleClick('rmv')">
-            Remove available time
+        <ion-item>
+            <div name="rmvtime" class="modal" (click)="handleClick('rmv')">Remove available time</div>
         </ion-item>
     </ion-list>`
 })
@@ -61,7 +61,7 @@ export class GroupMsgs {
         this.route.paramMap.subscribe(param => this.groupId = param.get('groupId'))
     }
     async presentAlert(header: string, msg: string, inputs?: any, buttons?: any) {
-        const alert = await this.alertController.create({ header: header, message: msg, inputs: inputs, buttons: buttons });
+        const alert = await this.alertController.create({ header: header, message: msg, inputs: inputs, buttons: buttons,id:"alertgroup"});
         await alert.present();
     }
     async showPopover(): Promise<void> {
@@ -75,13 +75,14 @@ export class GroupMsgs {
             else this.rmvTimeModal();
         })
     }
-    createAlertInput(name: string, type: string, label: string, value: string, checked?: boolean): any {
+    createAlertInput(name: string, type: string, label: string, value: string, checked?: boolean, id?:string): any {
         return {
             name,
             type,
             label,
             value,
-            checked
+            checked,
+            id
         }
     }
     createAddTimeButtons(): any {
@@ -100,9 +101,9 @@ export class GroupMsgs {
     async addTimeModal(): Promise<void> {
         const [header, msg] = ['Add my time', 'choose the meal']
         const inputs = [
-            this.createAlertInput('bkft', 'radio', 'Breakfast', 'breakfast', true),
-            this.createAlertInput('lch', 'radio', 'Lunch', 'lunch', false),
-            this.createAlertInput('dnn', 'radio', 'Dinner', 'dinner', false),
+            this.createAlertInput('bkft', 'radio', 'Breakfast', 'breakfast', true,'Breakfast'),
+            this.createAlertInput('lch', 'radio', 'Lunch', 'lunch', false,'Lunch'),
+            this.createAlertInput('dnn', 'radio', 'Dinner', 'dinner', false,'Dinner'),
         ]
         const buttons = this.createAddTimeButtons()
         await this.presentAlert(header, msg, inputs, buttons)
@@ -127,7 +128,7 @@ export class GroupMsgs {
     async rmvTimeModal(): Promise<void> {
         if (this.myMealsTimes.length) {
             let inputs = this.myMealsTimes.map(slot =>
-                this.createAlertInput(slot.meal, 'radio', slot.meal, slot.meal, false)
+                this.createAlertInput(slot.meal, 'radio', slot.meal, slot.meal, false, slot.meal)
             )
             inputs[0].checked = true;
             let [header, msg] = ['Remove my time', "choose the meal"]
@@ -179,8 +180,8 @@ export class GroupMsgs {
     }
     async chooseTimeModal(meal: "breakfast" | "lunch" | "dinner") {
         const inputs = [
-            this.createAlertInput('from', 'time', '', '00:00'),
-            this.createAlertInput('to', 'time', '', '00:00')
+            this.createAlertInput('from', 'time', '', '00:00',undefined, 'fromtime'),
+            this.createAlertInput('to', 'time', '', '00:00',undefined,'totime')
         ]
         const buttons = this.createChooseTimeButtons(meal)
         this.presentAlert('Add my time', 'choose you available time for ' + meal + '. From HH:MM to HH:MM', inputs, buttons)
