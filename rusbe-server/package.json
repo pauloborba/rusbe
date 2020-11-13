@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/rusbe-server/src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc && jasmine --config=./spec/support/jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,13 @@
     "mongoose": "^5.10.7",
     "tslint": "^6.1.2",
     "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "jasmine": "^2.8.0",
+    "@types/jasmine": "^2.8.9",
+    "jasmine-promises": "^0.4.1",
+    "request": "^2.34",
+    "request-promise": "^4.2.2",
+    "@types/request-promise": "^4.1.38"
   }
 }

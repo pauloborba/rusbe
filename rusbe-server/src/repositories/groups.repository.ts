@@ -55,7 +55,8 @@ export default class GroupsRepository {
         const group = await GroupSchema.findOne({ id: groupId })
         let meals: Meal[] = group.toJSON().meals_times
         meals.push(meal_time)
-        return await GroupSchema.updateOne({ id: groupId }, { $set: { meals_times: meals } })
+        await GroupSchema.updateOne({ id: groupId }, { $set: { meals_times: meals } })
+        return "Success to post time"
     }
     private async getNextMealTimes(groupId: string): Promise<any> {
         const info = await this.getInfoGroup(groupId)
@@ -127,6 +128,6 @@ export default class GroupsRepository {
             timestamp: msg.timestamp,
             type: msg.type
         })
-        return msgDoc
+        return "Success to post message"
     }
 }
