@@ -26,6 +26,12 @@ app.use('/', groups)
 app.use('/', suggestions)
 app.use('/', login)
 
-app.listen(3333,()=>{
+const server = app.listen(3333,()=>{
     console.log("Servidor ouvindo na porta 3333")
 })
+
+function closeServer(): void {
+    server.close();
+}
+
+export { server, closeServer }
