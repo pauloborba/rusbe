@@ -14,8 +14,9 @@ export class SuggestionsRepository {
         );
     }
 
-    async getAllSuggestions(): Promise<Suggestion[]> {
-        const queryResult = await SuggestionSchema.find();
+    async getUserSuggestions(userId: string): Promise<Suggestion[]> {
+        const queryResult = await SuggestionSchema.find({author: userId});
+
         const suggestions: Suggestion[] = [];
         for (const element of queryResult) {
             const suggestion: Suggestion = {

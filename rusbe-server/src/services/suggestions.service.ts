@@ -7,7 +7,7 @@ const suggestionsBasePath = '/suggestions';
 
 suggestionsService.get(suggestionsBasePath, async (req, res) => {
     try {
-       const suggestions = await suggestionsRepository.getAllSuggestions();
+       const suggestions = await suggestionsRepository.getUserSuggestions(req.query.userId as string);
        res.send({suggestions});
     } catch (error) {
         res.status(500).send({message: error.message});
