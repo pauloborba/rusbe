@@ -10,7 +10,7 @@ describe("The menu repository", () => {
     });
 
     afterAll(() => {
-        server.closeServer();
+        //server.closeServer();
     });
 
     it("registers a food" ,async () => {
