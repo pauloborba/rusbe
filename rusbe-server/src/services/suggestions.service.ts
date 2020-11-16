@@ -1,9 +1,26 @@
 import Router from 'express'
+import { SuggestionsRepository } from '../repositories/suggestions.repository';
 
 const suggestionsService = Router()
+const suggestionsRepository = new SuggestionsRepository();
+const suggestionsBasePath = '/suggestions';
 
-suggestionsService.get('/suggestions',async(req,res)=>{
-    res.send({msg:"Olá"})
+suggestionsService.get(suggestionsBasePath, async (req, res) => {
+    try {
+       const suggestions = await suggestionsRepository.getAllSuggestions();
+       res.send({suggestions});
+    } catch (error) {
+        res.status(500).send({message: error.message});
+    }
 })
 
-export default suggestionsService
+suggestionsService.post(suggestionsBasePath + '/new', async (req, res) => {
+    try {
+        await suggestionsRepository.createSuggestion(req.body);
+        res.send({result: 'success'});
+    } catch (error) {
+        res.status(500).send({message: error.message});
+    }
+})
+
+export default suggestionsService;
