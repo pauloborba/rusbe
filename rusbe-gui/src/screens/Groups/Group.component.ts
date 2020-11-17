@@ -169,7 +169,7 @@ export class GroupMsgs {
                             data["from"] + " to " + data["to"] + " on the " + (from.getMonth() + 1) + '/' + from.getDate(), this.userInfo.id, "meal-time")
                         this.GroupsService.postMyTime(this.groupId, { userId: this.userInfo.id, meal, fromTime: from, toTime: to }, msg).subscribe(
                             data => {
-                                this.presentAlert("Success", "You posted your time for " + meal)
+                                this.presentAlert("Success", "You just posted your time for " + meal)
                                 this.msgs.push(msg)
                                 this.myMealsTimes.push({ userId: this.userInfo.id, meal, fromTime: from, toTime: to })
                             },
