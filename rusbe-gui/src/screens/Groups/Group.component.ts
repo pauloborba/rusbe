@@ -159,17 +159,17 @@ export class GroupMsgs {
                     const to = this.createFullDate(toAr[0], toAr[1], 0)
 
                     if (from < tabletime[meal].from || to > tabletime[meal].to) {
-                        this.presentAlert("Error", meal + " occurs from " + tabletime[meal].from.getHours()
+                        this.presentAlert("Error", meal + " happens from " + tabletime[meal].from.getHours()
                             .toLocaleString() + " to " + tabletime[meal].to.getHours().toLocaleString())
                     }
                     else if (from > to)
-                        this.presentAlert("Error", "You cannot time travel")
+                        this.presentAlert("Error", "You cannot travel in time")
                     else {
                         const msg = new Message(this.userInfo.id + " is avaialble for " + meal + " from " +
                             data["from"] + " to " + data["to"] + " on the " + (from.getMonth() + 1) + '/' + from.getDate(), this.userInfo.id, "meal-time")
                         this.GroupsService.postMyTime(this.groupId, { userId: this.userInfo.id, meal, fromTime: from, toTime: to }, msg).subscribe(
                             data => {
-                                this.presentAlert("Success", "You just posted your time for " + meal)
+                                this.presentAlert("Success", "You posted your time for " + meal)
                                 this.msgs.push(msg)
                                 this.myMealsTimes.push({ userId: this.userInfo.id, meal, fromTime: from, toTime: to })
                             },

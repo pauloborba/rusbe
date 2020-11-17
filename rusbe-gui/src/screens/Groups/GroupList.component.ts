@@ -8,8 +8,8 @@ import Group from '../../../../common/groups'
     styleUrls: ['./GroupList.component.scss']
 })
 export class Groups {
-    userInfo: any;
     renderPage: Boolean;
+    userInfo: any;
     groups: Group[];
     times: string[]
     constructor(private GroupsService: GroupsService, private alertController: AlertController) { }
@@ -23,21 +23,18 @@ export class Groups {
                 this.times = data["times"]
             },
             async err => {
-                console.log('disgraçaaaa')
                 await this.presentAlert(err.error.message);
             }
         )
     }
-    async presentAlert(msg: string) {
+    async presentAlert(msg: string):Promise<void> {
         const alert = await this.alertController.create({
-            //cssClass: 'my-custom-class',
-            header: 'Erro',
+            header: 'Error',
             message: msg,
         });
-
         await alert.present();
     }
-    newGroup(){
+    newGroup():void{
         window.location.href="/screens/groups/newgroup"
     }
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { GroupsService } from '../../service/Groups.service'
 import { AlertController } from '@ionic/angular';
-import Group from '../../../../common/groups'
 
 @Component({
     selector: 'app-new-group',
@@ -10,10 +9,9 @@ import Group from '../../../../common/groups'
 })
 export class NewGroup {
     usersID: string[];
-    readyToCreate: Boolean;
     groupName: string;
     userInfo: any;
-
+    readyToCreate: Boolean;
     constructor(private GroupsService: GroupsService, private alertController: AlertController) { }
 
     ngOnInit(): void {
