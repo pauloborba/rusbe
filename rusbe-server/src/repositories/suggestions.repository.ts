@@ -4,6 +4,10 @@ import Suggestion from '../../../common/suggestion';
 export class SuggestionsRepository {
 
     async createSuggestion(newSuggestion: Suggestion) {
+        if (!newSuggestion.id || !newSuggestion.content || !newSuggestion.author || !newSuggestion.timestamp) {
+            throw new Error('IncompleteRequest');
+        }
+
         return (
             await SuggestionSchema.create({
                 id: newSuggestion.id,
