@@ -19,7 +19,7 @@
     <ion-progress-bar type="indeterminate" *ngIf="!suggestions"></ion-progress-bar>
 
     <ng-container *ngIf="suggestions">
-      <ion-card *ngFor="let suggestion of suggestions">
+      <ion-card *ngFor="let suggestion of suggestions" class="suggestion-card">
         <ion-card-header>
           <ion-card-subtitle>{{ suggestion.timestamp.toLocaleDateString("en-US") }}, {{ suggestion.timestamp.toLocaleTimeString("en-US") }}</ion-card-subtitle>
         </ion-card-header>
@@ -47,6 +47,6 @@
 
 <ion-footer *ngIf="renderPage; else loggedOut" class="ion-no-border">
   <div class="ion-padding ion-text-center">
-    <ion-button class="fill-button" shape="round" (click)="presentNewSuggestionPrompt()"><ion-icon name="add" slot="start"></ion-icon>New suggestion</ion-button>
+    <ion-button id="new-suggestion-button" class="fill-button" shape="round" (click)="presentNewSuggestionPrompt()"><ion-icon name="add" slot="start"></ion-icon>New suggestion</ion-button>
   </div>
 </ion-footer>
