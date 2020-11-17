@@ -9,3 +9,6 @@
 .vs
 .idea/
 dist/
+
+# Tests compiled code
+tests-acceptance/compiledCode/

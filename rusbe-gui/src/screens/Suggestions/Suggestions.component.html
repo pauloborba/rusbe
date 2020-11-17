@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Suggestions
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Suggestions</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container" *ngIf="renderPage; else loggedOut">
+    
+    <ion-progress-bar type="indeterminate" *ngIf="!suggestions"></ion-progress-bar>
+
+    <ng-container *ngIf="suggestions">
+      <ion-card *ngFor="let suggestion of suggestions" class="suggestion-card">
+        <ion-card-header>
+          <ion-card-subtitle>{{ suggestion.timestamp.toLocaleDateString("en-US") }}, {{ suggestion.timestamp.toLocaleTimeString("en-US") }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="suggestion-content">{{ suggestion.content }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    <p class="ion-padding" *ngIf="suggestions && suggestions.length === 0">You didn't sent any suggestions yet. Send you first one by clicking the button below.</p>
+
+  </div>
+
+  <ng-template #loggedOut>
+    <div class="container">
+      <header class="jumbotron">
+        <a href="/screens/login">
+          <p>Please login</p>
+        </a>
+      </header>
+    </div>
+  </ng-template>
+
+</ion-content>
+
+<ion-footer *ngIf="renderPage; else loggedOut" class="ion-no-border">
+  <div class="ion-padding ion-text-center">
+    <ion-button id="new-suggestion-button" class="fill-button" shape="round" (click)="presentNewSuggestionPrompt()"><ion-icon name="add" slot="start"></ion-icon>New suggestion</ion-button>
+  </div>
+</ion-footer>

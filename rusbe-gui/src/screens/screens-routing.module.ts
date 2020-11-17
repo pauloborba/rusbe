@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'suggestions',
-        loadChildren: () => import('./Suggetions/Suggestions.module').then(m => m.SuggestionsPageModule)
+        loadChildren: () => import('./Suggestions/Suggestions.module').then(m => m.SuggestionsPageModule)
       },
       {
         path: '',

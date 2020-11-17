@@ -1,0 +1,9 @@
+.fill-button {
+  width: 100%;
+  max-width: 400px;
+}
+
+.suggestion-content {
+  color: var(--ion-color-dark);
+  font-size: 1.25em;
+}
