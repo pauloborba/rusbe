@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="backToGroups()">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [disabled]="!readyToCreate" name="creategroup" (click)="createGroup()">
+                <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>NewGroup</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button name="addmember" (click)="addMember()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <div class="wrapper-name">
+        <div>
+            <div class="banner">
+            <ion-input class="name" name="groupname" id="name" placeholder="Please enter the group name" (change)="changeGroupName()"></ion-input>
+        </div>
+            <ion-list>
+                <ion-list-header style="font-size: 20px;">
+                    Group Members
+                  </ion-list-header>
+                  <div *ngIf="usersID.length>0; else zeroUsers">
+                    <ion-item *ngFor="let user of usersID; let i = index">
+                        <ion-avatar class="user-icon"><p>{{user[0]}}</p></ion-avatar>
+                        <ion-label>{{user}}</ion-label>
+                        <ion-icon name="trash-outline" (click)="removeUser(i)" class="remove-user"></ion-icon>
+                      </ion-item>
+                  </div>
+                  <ng-template #zeroUsers>
+                    <h4 class="zero-users">You haven't added anyone yet, click on the button below to start!</h4>
+                  </ng-template>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>

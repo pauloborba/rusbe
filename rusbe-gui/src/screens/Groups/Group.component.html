@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>{{groupName}}</ion-title>
+        <ion-buttons slot="start">
+            <ion-button (click)="backToGroups()">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <button name="showpopover" (click)="showPopover()">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <div *ngIf="renderPage else loggedOut">
+        <div class="wrapper">
+            <div>
+                <div *ngFor="let msg of msgs" [ngClass]="msg.type">
+                    <p>{{msg.content}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #loggedOut>
+        <div class="container">
+            <header class="jumbotron">
+                <a href="/screens/login">
+                    <p>Please login</p>
+                </a>
+            </header>
+        </div>
+    </ng-template>
+</ion-content>

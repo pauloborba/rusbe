@@ -6,8 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
+  <ion-fab *ngIf="renderPage" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="newGroup()" name="newgroup">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Groups</ion-title>
@@ -15,7 +19,15 @@
   </ion-header>
 
   <div class="container" *ngIf="renderPage; else loggedOut">
-    <p>Groups Screen</p>
+    <ion-list>
+      <ion-item *ngFor="let group of groups; let i=index">
+        <ion-avatar class="group-icon"><p>{{group.name[0]}}</p></ion-avatar>
+        <a [routerLink]="['./groupmsgs', group.id]" name="groupname">
+          <ion-label>{{group.name}}</ion-label>
+          <p class="time">{{times[i]}}</p>
+        </a>
+      </ion-item>
+    </ion-list>
   </div>
 
   <ng-template #loggedOut>
